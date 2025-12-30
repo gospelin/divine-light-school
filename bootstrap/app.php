@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
             'share.session' => \App\Http\Middleware\ShareAcademicSession::class,
+            'share.teacher' => \App\Http\Middleware\ShareTeacherData::class,
         ]);
 
         // Your other middleware aliases (if any)

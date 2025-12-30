@@ -1,14 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+
+// Guest Controllers
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\EventController;
+
+// Auth Controller
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+// Admin Controllers
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BlogAdminController;
 use App\Http\Controllers\Admin\VideoAdminController;
 use App\Http\Controllers\Admin\GalleryAdminController;
@@ -18,9 +24,15 @@ use App\Http\Controllers\Admin\SchoolClassController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\FeeController;
+use App\Http\Controllers\Admin\SubjectController;
+
+// Added for Teacher Dashboard
 use App\Http\Controllers\Admin\TeacherController;
-
-
+use App\Http\Controllers\Teacher\TeacherDashboardController;
+use App\Http\Controllers\Teacher\TeacherClassController;
+use App\Http\Controllers\Teacher\TeacherStudentController;
+use App\Http\Controllers\Teacher\ClassSubjectController;
+use App\Http\Controllers\Teacher\TeacherResultController;
 
 
 /*
@@ -165,7 +177,7 @@ Route::middleware(['auth', 'role:admin|super-admin', 'share.session'])
 
         Route::post('/sessions/{session}/make-current', [AcademicSessionController::class, 'setGlobalCurrent'])
             ->name('sessions.make-current');
-        
+
         // Student Promotion
         Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
         Route::post('/promotions', [PromotionController::class, 'promote'])->name('promotions.promote');
@@ -175,6 +187,9 @@ Route::middleware(['auth', 'role:admin|super-admin', 'share.session'])
         Route::resource('fees', FeeController::class);
         Route::get('/students/{student}/pay-fees', [FeeController::class, 'recordPayment'])->name('fees.pay');
         Route::post('/students/{student}/pay-fees', [FeeController::class, 'recordPayment']);
+
+        // Subjects Management
+        Route::resource('subjects', SubjectController::class);
     });
 
 /*
@@ -183,11 +198,39 @@ Route::middleware(['auth', 'role:admin|super-admin', 'share.session'])
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'role:teacher'])
+// Route::middleware(['auth', 'role:teacher'])
+//     ->prefix('teacher')
+//     ->name('teacher.')
+//     ->group(function () {
+//         Route::get('/dashboard', fn() => view('teacher.dashboard'))->name('dashboard');
+//     });
+
+
+Route::middleware(['auth', 'role:teacher', 'share.session', 'share.teacher'])
     ->prefix('teacher')
     ->name('teacher.')
     ->group(function () {
-        Route::get('/dashboard', fn() => view('teacher.dashboard'))->name('dashboard');
+        Route::get('/dashboard', [TeacherDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/classes/{class}', [TeacherClassController::class, 'show'])->name('classes.show');
+
+        // NEW: Edit student (only if in teacher's class)
+        Route::get('/students/{student}/edit', [TeacherStudentController::class, 'edit'])->name('students.edit');
+        Route::put('/students/{student}', [TeacherStudentController::class, 'update'])->name('students.update');
+        Route::get('/students/{student}', [TeacherStudentController::class, 'show'])->name('students.show');
+
+        Route::prefix('classes/{class}')->group(function () {
+            Route::get('/subjects', [ClassSubjectController::class, 'index'])->name('classes.subjects.index');
+            Route::post('/subjects', [ClassSubjectController::class, 'store'])->name('classes.subjects.store');
+            Route::put('/subjects/{subject}', [ClassSubjectController::class, 'update'])->name('classes.subjects.update');
+            Route::delete('/subjects/{subject}', [ClassSubjectController::class, 'destroy'])->name('classes.subjects.destroy');
+
+        });
+
+        // Results Management
+        Route::prefix('classes/{class}')->group(function () {
+            Route::get('/results', [TeacherResultController::class, 'index'])->name('classes.results.index');
+            Route::post('/results', [TeacherResultController::class, 'store'])->name('classes.results.store');
+        });
     });
 
 /*

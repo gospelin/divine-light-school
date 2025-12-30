@@ -90,4 +90,14 @@ class Student extends Model
             ->wherePivot('academic_session_id', $currentSessionId)
             ->first();
     }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
+
+    public function termSummaries()
+    {
+        return $this->hasMany(StudentTermSummary::class);
+    }
 }

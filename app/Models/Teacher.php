@@ -16,7 +16,7 @@ class Teacher extends Model
         'date_employed',
         'bio',
         'phone',
-        'address'
+        'address',
     ];
 
     protected $casts = [
@@ -35,10 +35,19 @@ class Teacher extends Model
             ->withTimestamps();
     }
 
-    public function currentClasses()
+    /**
+     * Get classes assigned to the teacher in the current academic session
+     */
+    public function getCurrentClassesAttribute()
     {
         $currentSessionId = AcademicSession::current()?->id;
 
-        return $this->classes()->wherePivot('academic_session_id', $currentSessionId);
+        if (!$currentSessionId) {
+            return collect();
+        }
+
+        return $this->classes()
+            ->wherePivot('academic_session_id', $currentSessionId)
+            ->get();
     }
 }

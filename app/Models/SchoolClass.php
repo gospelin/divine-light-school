@@ -45,4 +45,15 @@ class SchoolClass extends Model
             ->withPivot('academic_session_id', 'enrolled_at')
             ->withTimestamps();
     }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'class_subjects');
+    }
+
+    public function termSummaries()
+    {
+        return $this->hasMany(StudentTermSummary::class);
+    }
+
 }
