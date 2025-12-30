@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+/* Enable the official Tailwind Typography plugin */
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/container-queries";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}

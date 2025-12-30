@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divine Light International School & Seminary - Excellence in Education</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-book"></i>
+                <span>Divine Light School</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#programs" class="nav-link">Programs</a></li>
+                <li class="nav-item"><a href="#features" class="nav-link">Why Us</a></li>
+                <li class="nav-item"><a href="#events" class="nav-link">Events</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="#admission" class="nav-link nav-link-btn">Admission</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Slideshow -->
+    <section id="home" class="hero">
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="images/school_building.jpg" alt="Divine Light School Building">
+                <div class="slide-content">
+                    <h1>Welcome to Divine Light</h1>
+                    <p>Where Excellence Meets Innovation in Education</p>
+                    <a href="#admission" class="cta-btn primary">Enroll Now</a>
+                </div>
+            </div>
+            
+            <div class="slide fade">
+                <div class="slide-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="slide-content">
+                    <h1>Nurturing Young Minds</h1>
+                    <p>Building Future Leaders Through Quality Education</p>
+                    <a href="#about" class="cta-btn primary">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="slide fade">
+                <div class="slide-bg" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                <div class="slide-content">
+                    <h1>Academic Excellence</h1>
+                    <p>Combining Modern Teaching with Classical Values</p>
+                    <a href="#programs" class="cta-btn primary">Discover Our Programs</a>
+                </div>
+            </div>
+
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <span>Scroll to explore</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Divine Light School</h2>
+                <p>We understand how vital the formative years are and the impact on our communities</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>Divine Light International School & Divine Light Seminary Secondary School is dedicated to providing quality education that nurtures academic excellence, character development, and holistic growth. We blend classical educational values with modern teaching methodologies to create an environment where students thrive.</p>
+                    
+                    <h3>Our Vision</h3>
+                    <p>To be a beacon of educational excellence, producing well-rounded individuals equipped with knowledge, skills, and moral values to positively impact their communities and the world.</p>
+
+                    <div class="mission-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-star"></i>
+                            <h4>Excellence</h4>
+                            <p>Commitment to highest standards</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-heart"></i>
+                            <h4>Character</h4>
+                            <p>Moral and ethical development</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-globe"></i>
+                            <h4>Community</h4>
+                            <p>Impact and service mindset</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-image">
+                    <img src="images/school_building.jpg" alt="Divine Light School Campus">
+                    <div class="image-overlay">
+                        <div class="stat">
+                            <h4>500+</h4>
+                            <p>Students</p>
+                        </div>
+                        <div class="stat">
+                            <h4>30+</h4>
+                            <p>Staff</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Academic Programs</h2>
+                <p>Comprehensive education across all levels</p>
+            </div>
+
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Early Childhood</h3>
+                    <p>Foundation for lifelong learning. We focus on developing social skills, creativity, and foundational academic knowledge in a nurturing environment.</p>
+                    <ul class="program-features">
+                        <li><i class="fas fa-check"></i> Play-based Learning</li>
+                        <li><i class="fas fa-check"></i> Language Development</li>
+                        <li><i class="fas fa-check"></i> Creative Arts</li>
+                    </ul>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Primary Education</h3>
+                    <p>Building strong academic foundations with emphasis on critical thinking, problem-solving, and character development.</p>
+                    <ul class="program-features">
+                        <li><i class="fas fa-check"></i> Core Academics</li>
+                        <li><i class="fas fa-check"></i> STEM Subjects</li>
+                        <li><i class="fas fa-check"></i> Physical Education</li>
+                    </ul>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Secondary Education</h3>
+                    <p>Advanced curriculum preparing students for higher education and future careers with specialized subject streams.</p>
+                    <ul class="program-features">
+                        <li><i class="fas fa-check"></i> Advanced Sciences</li>
+                        <li><i class="fas fa-check"></i> Humanities</li>
+                        <li><i class="fas fa-check"></i> Leadership Training</li>
+                    </ul>
+                </div>
+
+                <div class="program-card">
+                    <div class="program-icon">
+                        <i class="fas fa-monastery"></i>
+                    </div>
+                    <h3>Seminary Program</h3>
+                    <p>Specialized education combining academic excellence with spiritual growth and values-based learning.</p>
+                    <ul class="program-features">
+                        <li><i class="fas fa-check"></i> Theological Studies</li>
+                        <li><i class="fas fa-check"></i> Moral Formation</li>
+                        <li><i class="fas fa-check"></i> Community Service</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Divine Light?</h2>
+                <p>Excellence in every aspect of education</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-user"></i>
+                    </div>
+                    <h3>Expert Faculty</h3>
+                    <p>Highly qualified and dedicated teachers committed to student success and personal development.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Modern Facilities</h3>
+                    <p>State-of-the-art classrooms, laboratories, and technology-enabled learning spaces.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield"></i>
+                    </div>
+                    <h3>Safe Environment</h3>
+                    <p>Secure, comfortable campus with comprehensive safety protocols and student welfare measures.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Holistic Development</h3>
+                    <p>Co-curricular activities fostering sports, arts, leadership, and character development.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Parent Partnership</h3>
+                    <p>Strong collaboration with parents ensuring consistent support for student growth.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Perspective</h3>
+                    <p>International curriculum standards combined with local cultural values and relevance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Parents & Students Say</h2>
+                <p>Real experiences from our Divine Light family</p>
+            </div>
+
+            <div class="testimonials-carousel">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+                    <p>"Divine Light has been exceptional in nurturing both the academic and moral development of our child. The teachers are dedicated and genuinely care about each student's growth."</p>
+                    <div class="testimonial-author">
+                        <h4>Mrs. Adeola Johnson</h4>
+                        <p>Parent, Grade 4</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+                    <p>"The environment here is safe, friendly, and encouraging. I love my school! The teachers make learning fun and we're encouraged to participate in many activities."</p>
+                    <div class="testimonial-author">
+                        <h4>Chisom, Grade 6</h4>
+                        <p>Student</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                    </div>
+                    <p>"The quality of education combined with values-based teaching is exactly what we were looking for. Divine Light truly makes a difference in children's lives."</p>
+                    <div class="testimonial-author">
+                        <h4>Pastor Emeka Okonkwo</h4>
+                        <p>Parent, Seminary Student</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+                <p>Join us for exciting school activities and celebrations</p>
+            </div>
+
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="month">Dec</span>
+                        <span class="day">8</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>2025 Trade Fair & Exhibition</h3>
+                        <p>Come and shop at very cheap prices while watching the talent and creativity of Divine Light kids. Location: @6-9 CFG Avenue off 119 P.H Road Aba.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 8:00 AM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> School Campus</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="month">Dec</span>
+                        <span class="day">15</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Year-End Celebration</h3>
+                        <p>Join us for a spectacular year-end celebration featuring student performances, awards presentation, and special surprises.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 9:00 AM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> School Auditorium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <span class="month">Jan</span>
+                        <span class="day">10</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>New Academic Session Begins</h3>
+                        <p>Welcome back! New and returning students gather for orientation and the commencement of the new academic year.</p>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> 7:30 AM</span>
+                            <span><i class="fas fa-map-marker-alt"></i> School Campus</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="admission" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Join Divine Light Family?</h2>
+                <p>Give your child the gift of quality education combined with values-based learning. Admissions are now open!</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="cta-btn primary">Learn About Admission</a>
+                    <a href="#contact" class="cta-btn secondary">Download Prospectus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get in Touch</h2>
+                <p>We're here to answer your questions and welcome your inquiries</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>School Address</h3>
+                        <p>@6-9 CFG Avenue<br>off 119 P.H Road<br>Aba, Abia State<br>Nigeria</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Contact Numbers</h3>
+                        <p>
+                            <a href="tel:+234">+234 (0) XXX XXX XXXX</a><br>
+                            <a href="tel:+234">+234 (0) XXX XXX XXXX</a>
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Address</h3>
+                        <p>
+                            <a href="mailto:info@divinelightschool.ng">info@divinelightschool.ng</a><br>
+                            <a href="mailto:admissions@divinelightschool.ng">admissions@divinelightschool.ng</a>
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>School Hours</h3>
+                        <p>Monday - Friday: 7:30 AM - 4:00 PM<br>Saturday & Sunday: Closed</p>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="cta-btn primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Divine Light School</h4>
+                    <p>Excellence in Education, Excellence in Character</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Information</h4>
+                    <ul>
+                        <li><a href="#">Admissions</a></li>
+                        <li><a href="#">Prospectus</a></li>
+                        <li><a href="#">School Calendar</a></li>
+                        <li><a href="#">Staff Directory</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <p>For admission inquiries and general information</p>
+                    <a href="mailto:info@divinelightschool.ng" class="cta-btn small">Email Us</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Divine Light International School & Seminary. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
