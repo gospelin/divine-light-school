@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\SchoolClass;
 use App\Models\Subject;
 use App\Models\AcademicSession;
+use App\Models\ClassSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 class ClassSubjectController extends Controller
 {
@@ -16,8 +16,10 @@ class ClassSubjectController extends Controller
     {
         $teacher = Auth::user()->teacher;
 
+        $currentSessionId = AcademicSession::current()?->id;
+
         $isAssigned = $teacher->classes()
-            ->wherePivot('academic_session_id', AcademicSession::current()?->id)
+            ->wherePivot('academic_session_id', $currentSessionId)
             ->where('school_classes.id', $class->id)
             ->exists();
 
@@ -25,16 +27,23 @@ class ClassSubjectController extends Controller
             abort(403);
         }
 
-        $assignedSubjectIds = $class->subjects()->pluck('subjects.id')->toArray();
-        $availableSubjects = Subject::orderBy('name')->get();
+        // Load assigned class-subject combinations
+        $classSubjects = $class->classSubjects()
+            ->with('subject')
+            ->get()
+            ->sortBy('subject.name');
 
-        $classSubjects = $class->subjects()->orderBy('name')->get();
+        $assignedSubjectIds = $classSubjects->pluck('subject.id')->toArray();
+
+        $availableSubjects = Subject::whereNotIn('id', $assignedSubjectIds)
+            ->orderBy('name')
+            ->get();
 
         return view('teacher.class_subjects.index', compact(
             'class',
+            'classSubjects',
             'availableSubjects',
-            'assignedSubjectIds',
-            'classSubjects'
+            'assignedSubjectIds'
         ));
     }
 
@@ -42,8 +51,10 @@ class ClassSubjectController extends Controller
     {
         $teacher = Auth::user()->teacher;
 
+        $currentSessionId = AcademicSession::current()?->id;
+
         $isAssigned = $teacher->classes()
-            ->wherePivot('academic_session_id', AcademicSession::current()?->id)
+            ->wherePivot('academic_session_id', $currentSessionId)
             ->where('school_classes.id', $class->id)
             ->exists();
 
@@ -56,23 +67,42 @@ class ClassSubjectController extends Controller
             'subject_ids.*' => 'exists:subjects,id',
         ]);
 
-        $newSubjects = array_diff($request->subject_ids, $class->subjects()->pluck('subjects.id')->toArray());
+        $newSubjectIds = $request->subject_ids;
 
-        if (empty($newSubjects)) {
-            return back()->with('info', 'No new subjects selected.');
+        $addedCount = 0;
+
+        foreach ($newSubjectIds as $subjectId) {
+            // Check if already assigned
+            $exists = $class->classSubjects()
+                ->where('subject_id', $subjectId)
+                ->exists();
+
+            if (!$exists) {
+                // Create new ClassSubject record
+                ClassSubject::create([
+                    'school_class_id' => $class->id,
+                    'subject_id'      => $subjectId,
+                ]);
+
+                $addedCount++;
+            }
         }
 
-        $class->subjects()->attach($newSubjects);
+        if ($addedCount === 0) {
+            return back()->with('info', 'No new subjects were added (already assigned).');
+        }
 
-        return back()->with('success', count($newSubjects) . ' subject(s) added to class.');
+        return back()->with('success', "{$addedCount} subject(s) successfully added.");
     }
 
     public function destroy(SchoolClass $class, Subject $subject)
     {
         $teacher = Auth::user()->teacher;
 
+        $currentSessionId = AcademicSession::current()?->id;
+
         $isAssigned = $teacher->classes()
-            ->wherePivot('academic_session_id', AcademicSession::current()?->id)
+            ->wherePivot('academic_session_id', $currentSessionId)
             ->where('school_classes.id', $class->id)
             ->exists();
 
@@ -80,8 +110,16 @@ class ClassSubjectController extends Controller
             abort(403);
         }
 
-        $class->subjects()->detach($subject->id);
+        $classSubject = $class->classSubjects()
+            ->where('subject_id', $subject->id)
+            ->first();
 
-        return back()->with('success', 'Subject removed from class.');
+        if (!$classSubject) {
+            return back()->with('info', 'Subject not found in this class.');
+        }
+
+        $classSubject->delete();
+
+        return back()->with('success', 'Subject removed from class successfully.');
     }
 }

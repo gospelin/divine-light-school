@@ -60,6 +60,8 @@
         background: var(--accent);
     }
 </style>
+
+    @stack('styles')
 </head>
 
 <body class="antialiased bg-gray-50 text-gray-800" x-data="{ sidebarOpen: true }">

@@ -91,6 +91,12 @@ class Student extends Model
             ->first();
     }
 
+    // Get current subjects via current class
+    public function getCurrentSubjectsAttribute()
+    {
+        return $this->current_class?->subjects()->orderBy('name')->get() ?? collect();
+    }
+
     public function results()
     {
         return $this->hasMany(Result::class);

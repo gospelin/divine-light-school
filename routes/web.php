@@ -230,7 +230,16 @@ Route::middleware(['auth', 'role:teacher', 'share.session', 'share.teacher'])
         Route::prefix('classes/{class}')->group(function () {
             Route::get('/results', [TeacherResultController::class, 'index'])->name('classes.results.index');
             Route::post('/results', [TeacherResultController::class, 'store'])->name('classes.results.store');
+            Route::put('/results', [TeacherResultController::class, 'update'])->name('classes.results.update');
+
+            Route::get('/broadsheet', [TeacherResultController::class, 'index'])
+                ->name('results.broadsheet');
+
+            Route::post('/broadsheet/update-field', [TeacherResultController::class, 'updateField'])
+                ->name('results.update_field');
         });
+
+        
     });
 
 /*

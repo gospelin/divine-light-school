@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SchoolClass extends Model
 {
@@ -25,35 +27,31 @@ class SchoolClass extends Model
             ->orderBy('group');
     }
 
-    // public function scopeOrdered($query)
-    // {
-    //     return $query->orderByRaw("
-    //         CASE section
-    //             WHEN 'Nursery' THEN 1
-    //             WHEN 'Primary' THEN 2
-    //             WHEN 'Secondary' THEN 3
-    //         END
-    //     ")
-    //     ->orderBy('order')
-    //     ->orderBy('name')
-    //     ->orderBy('group');
-    // }
-
-    public function students()
+    // Students enrolled in this class (across sessions)
+    public function students(): BelongsToMany
     {
         return $this->belongsToMany(Student::class, 'class_student', 'class_id', 'student_id')
             ->withPivot('academic_session_id', 'enrolled_at')
             ->withTimestamps();
     }
 
-    public function subjects()
+    // Subjects assigned to this class — now through ClassSubject
+    public function subjects(): BelongsToMany
     {
-        return $this->belongsToMany(Subject::class, 'class_subjects');
+        return $this->belongsToMany(Subject::class, 'class_subjects')
+            ->using(ClassSubject::class)
+            ->withPivot('id')
+            ->withTimestamps();
     }
 
-    public function termSummaries()
+    // Direct access to ClassSubject records
+    public function classSubjects(): HasMany
+    {
+        return $this->hasMany(ClassSubject::class);
+    }
+
+    public function termSummaries(): HasMany
     {
         return $this->hasMany(StudentTermSummary::class);
     }
-
 }

@@ -9,11 +9,12 @@ class AcademicSession extends Model
 {
     use HasFactory;
 
+    // In AcademicSession.php
     protected $fillable = [
         'start_year',
         'end_year',
         'name',
-        'is_current',
+        'is_current',           
         'start_date',
         'end_date',
         'description'
@@ -35,14 +36,13 @@ class AcademicSession extends Model
                 $session->name = "{$session->start_year}/{$session->end_year}";
             }
         });
-
-        // REMOVED THE saving() EVENT ENTIRELY — this was causing memory explosion
     }
 
-    // public function getDisplayNameAttribute(): string
-    // {
-    //     return $this->name . ' Session';
-    // }
+    public static function getCurrentSessionAndTerm()
+    {
+        $session = self::where('is_current', true)->first();
+        return [$session, $session?->current_term];
+    }
 
     public function scopeCurrent($query)
     {

@@ -13,7 +13,7 @@ class StudentTermSummary extends Model
         'student_id',
         'school_class_id',
         'academic_session_id',
-        'term',
+        'term',                     
         'total_subjects',
         'total_score',
         'average',
@@ -22,7 +22,6 @@ class StudentTermSummary extends Model
         'school_reopens',
         'class_teacher_comment',
         'principal_comment',
-        'director_comment',
         'promotion_status',
         'is_published',
     ];
@@ -32,6 +31,7 @@ class StudentTermSummary extends Model
         'school_reopens' => 'date',
         'average' => 'decimal:2',
         'is_published' => 'boolean',
+        'term' => 'string',
     ];
 
     public function student()
