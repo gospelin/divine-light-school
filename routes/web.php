@@ -237,6 +237,9 @@ Route::middleware(['auth', 'role:teacher', 'share.session', 'share.teacher'])
 
             Route::post('/broadsheet/update-field', [TeacherResultController::class, 'updateField'])
                 ->name('results.update_field');
+
+            Route::post('/term-dates', [TeacherResultController::class, 'updateTermDates'])
+                ->name('results.update_term_dates');
         });
 
         

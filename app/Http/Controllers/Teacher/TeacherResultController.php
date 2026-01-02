@@ -232,4 +232,39 @@ class TeacherResultController extends TeacherBaseController
             ]
         );
     }
+
+    public function updateTermDates(Request $request, SchoolClass $class)
+    {
+        $request->validate([
+            'school_closes' => 'required|date',
+            'school_reopens' => 'required|date|after:school_closes',
+            'session_id' => 'required|exists:academic_sessions,id',
+            'term' => 'required|in:First,Second,Third',
+        ]);
+
+        $sessionId = $request->session_id;
+        $term = $request->term;
+
+        // Authorization (same as broadsheet)
+        $teacher = Auth::user()->teacher;
+        $isAssigned = $teacher->classes()
+            ->wherePivot('academic_session_id', $sessionId)
+            ->where('school_classes.id', $class->id)
+            ->exists();
+
+        if (!$isAssigned) {
+            return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
+        }
+
+        // Update ALL students in this class for this term
+        StudentTermSummary::where('school_class_id', $class->id)
+            ->where('academic_session_id', $sessionId)
+            ->where('term', $term)
+            ->update([
+                'school_closes' => $request->school_closes,
+                'school_reopens' => $request->school_reopens,
+            ]);
+
+        return response()->json(['success' => true, 'message' => 'School dates updated for all students.']);
+    }
 }

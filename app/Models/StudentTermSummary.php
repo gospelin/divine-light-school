@@ -17,7 +17,6 @@ class StudentTermSummary extends Model
         'total_subjects',
         'total_score',
         'average',
-        'position_in_class',
         'school_closes',
         'school_reopens',
         'class_teacher_comment',
@@ -49,18 +48,18 @@ class StudentTermSummary extends Model
         return $this->belongsTo(AcademicSession::class);
     }
 
-    public function getPositionSuffixAttribute()
-    {
-        if (!$this->position_in_class)
-            return '';
-        $pos = $this->position_in_class;
-        if ($pos % 100 >= 11 && $pos % 100 <= 13)
-            return $pos . 'th';
-        return match ($pos % 10) {
-            1 => $pos . 'st',
-            2 => $pos . 'nd',
-            3 => $pos . 'rd',
-            default => $pos . 'th',
-        };
-    }
+    // public function getPositionSuffixAttribute()
+    // {
+    //     if (!$this->position_in_class)
+    //         return '';
+    //     $pos = $this->position_in_class;
+    //     if ($pos % 100 >= 11 && $pos % 100 <= 13)
+    //         return $pos . 'th';
+    //     return match ($pos % 10) {
+    //         1 => $pos . 'st',
+    //         2 => $pos . 'nd',
+    //         3 => $pos . 'rd',
+    //         default => $pos . 'th',
+    //     };
+    // }
 }
